@@ -3,12 +3,15 @@ import random
 
 class Game:
 
-    def __init__(self, game_count, winning_count, lost_count):
+    winning_count: int
+
+    def __init__(self):
         self.user_input = ""
-        self.game_count = game_count
-        self.winning_count = winning_count
-        self.lost_count = lost_count
         self.max_tries = 10
+        self.game_count = 0
+        self.winning_count = 0
+        self.lost_count = 0
+        self.welcome_and_print()
 
     def generate_random_num(self):
         x = random.randint(0, 100)
@@ -63,46 +66,48 @@ class Game:
                 print("invalid, your input must be number and between 0 and 100")
                 user_in = self.get_user_input()
 
-    def winner_play_again(self,try_count):  # toka
-        if try_count<10:
+    def winner_play_again(self, try_count):  # toka
+        if try_count < 10:
             print("You Still Have Tries,Let's Challenge Again")
             ran_num = self.generate_random_num()
             inp = self.get_user_input()
-            self.validate_and_play(inp, ran_num,try_count)
-            
+            self.validate_and_play(inp, ran_num, try_count)
+
     def loser_play_again(self):  # mostafa
         print("")
 
-    def welcome_and_print(): #Nour
-        game_file = open("E:\game.txt", "r+") #adding file name or path
+    def welcome_and_print(self):  # Nour
+        game_file = open("game.txt", "r+")  # adding file name or path
         (game_file.readable())
         i = 0
         for x in game_file.readlines():
             if i == 0:
-               print("Number of played games = " + x)
+                print("Number of played games = " + x)
+                self.game_count = int(x)
             elif i == 1:
                 print("Number of wins = " + x)
+                self.winning_count = int(x)
             elif i == 2:
                 print("Number of losses = " + x)
+                self.lost_count = int(x)
             i += 1
 
         game_file.close()
-        
 
     def save_player_data(self):  # Nour
         g = self.game_count
         w = self.winning_count
-        l = self.lost_count  
-        game_file = open("E:\game.txt", "r+") #adding file name or path
-        game_file.write(str(g))
-        game_file.write(str(w))
-        game_file.write(str(l))
+        l = self.lost_count
+        game_file = open("game.txt", "r+")  # adding file name or path
+        game_file.write(f'{str(g)}\n')
+        game_file.write(f'{str(w)}\n')
+        game_file.write(f'{str(l)}\n')
 
         game_file.close()
-        
 
 
-new_game = Game(1, 1, 1)
+new_game = Game()
 ran_num = new_game.generate_random_num()
 inp = new_game.get_user_input()
 new_game.validate_and_play(inp, ran_num)
+new_game.save_player_data()
