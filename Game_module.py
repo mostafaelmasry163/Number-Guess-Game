@@ -73,11 +73,18 @@ class Game:
     def loser_play_again(self):  # mostafa
         print("")
 
-    def welcome_and_print():  # Nour
+    def welcome_and_print(): #Nour
         game_file = open("E:\game.txt", "r+") #adding file name or path
         (game_file.readable())
+        i = 0
         for x in game_file.readlines():
-            print(x)
+            if i == 0:
+               print("Number of played games = " + x)
+            elif i == 1:
+                print("Number of wins = " + x)
+            elif i == 2:
+                print("Number of losses = " + x)
+            i += 1
 
         game_file.close()
         
@@ -85,11 +92,11 @@ class Game:
     def save_player_data(self):  # Nour
         g = self.game_count
         w = self.winning_count
-        l = self.lost_count = 
+        l = self.lost_count  
         game_file = open("E:\game.txt", "r+") #adding file name or path
-        game_file.write("Number of played games = " + str(g))
-        game_file.write("\nNumber of wins = " + str(w))
-        game_file.write("\nNumber of losses = " + str(l))
+        game_file.write(str(g))
+        game_file.write(str(w))
+        game_file.write(str(l))
 
         game_file.close()
         
