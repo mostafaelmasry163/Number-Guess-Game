@@ -32,7 +32,8 @@ class Game:
                         if try_count < self.max_tries:
                             user_in = self.get_user_input()
                         else:
-                            print("that was your last try")
+                            print(f"the number was {ran_num}")
+                            self.loser_play_again()
                             self.game_count += 1
                             self.lost_count += 1
                             condition = False
@@ -41,7 +42,8 @@ class Game:
                         if try_count < self.max_tries:
                             user_in = self.get_user_input()
                         else:
-                            print("that was your last try")
+                            print(f"the number was {ran_num}")
+                            self.loser_play_again()
                             self.game_count += 1
                             self.lost_count += 1
                             condition = False
@@ -71,13 +73,40 @@ class Game:
             self.validate_and_play(inp, ran_num,try_count)
             
     def loser_play_again(self):  # mostafa
-        print("")
+        print("that was your last try")
+        print('you lost')
+        answer = input('play again?(Y/N): ')
+        if answer.upper() == 'Y':
+            #play again
+            ran_num = self.generate_random_num()
+            inp = self.get_user_input()
+            self.validate_and_play(inp, ran_num)
+        elif answer.upper() == 'N':
+            #close the game
+            return
+        else:
+            print('invalid input')
 
-    def welcome_and_print(self):  # Nour
-        print("")
+    def welcome_and_print():  # Nour
+        game_file = open("E:\game.txt", "r+") #adding file name or path
+        (game_file.readable())
+        for x in game_file.readlines():
+            print(x)
+
+        game_file.close()
+        
 
     def save_player_data(self):  # Nour
-        print("")
+        g = self.game_count
+        w = self.winning_count
+        l = self.lost_count 
+        game_file = open("E:\game.txt", "r+") #adding file name or path
+        game_file.write("Number of played games = " + str(g))
+        game_file.write("\nNumber of wins = " + str(w))
+        game_file.write("\nNumber of losses = " + str(l))
+
+        game_file.close()
+        
 
 
 new_game = Game(1, 1, 1)
