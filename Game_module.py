@@ -51,8 +51,7 @@ class Game:
                             self.lost_count += 1
                             condition = False
                     elif int(user_in) == ran_num:
-                        print(f"that's it, well done, Congratulation \n"
-                              f"you made it in {try_count} tries")
+                        print(f"that's it, well done, Congratulation ") 
                         self.game_count += 1
                         self.winning_count += 1
                         self.winner_play_again(try_count)
@@ -68,14 +67,14 @@ class Game:
                 print("invalid, your input must be number and between 0 and 100")
                 user_in = self.get_user_input()
 
-    def winner_play_again(self, try_count):  # toka
+    def winner_play_again(self, try_count):  
         if try_count < 10:
             print("You Still Have Tries,Let's Challenge Again")
             ran_num = self.generate_random_num()
             inp = self.get_user_input()
             self.validate_and_play(inp, ran_num, try_count)
 
-    def loser_play_again(self):  # mostafa
+    def loser_play_again(self):  
         print("that was your last try")
         print('you lost')
         answer = input('play again?(Y/N): ')
@@ -90,8 +89,8 @@ class Game:
         else:
             print('invalid input')
 
-    def welcome_and_print(self):  # Nour
-        game_file = open("game.txt", "r+")  # adding file name or path
+    def welcome_and_print(self):  
+        game_file = open("game.txt", "r+")  
         (game_file.readable())
         i = 0
         for x in game_file.readlines():
@@ -108,7 +107,7 @@ class Game:
 
         game_file.close()
 
-    def save_player_data(self):  # Nour
+    def save_player_data(self):  
         g = self.game_count
         w = self.winning_count
         l = self.lost_count
@@ -119,9 +118,3 @@ class Game:
 
         game_file.close()
 
-
-new_game = Game()
-ran_num = new_game.generate_random_num()
-inp = new_game.get_user_input()
-new_game.validate_and_play(inp, ran_num)
-new_game.save_player_data()
